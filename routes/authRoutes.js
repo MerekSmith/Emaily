@@ -10,15 +10,22 @@ module.exports = app => {
   );
 
   // Once the user gives google permission, they will be sent back with their code here. We then send another request with the provided code and receive back the user's profile info.
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      // redirect is a function that comes from the response and can redirect us back to a different page.
+      res.redirect("/surveys");
+    }
+  );
 
   app.get("/api/logout", (req, res) => {
     // the logout function is included in the req from passport and basically deletes the cookie.
     req.logout();
-    res.send(req.user);
+    res.redirect("/");
   });
 
-  app.get("/api/currentuser", (req, res) => {
+  app.get("/api/current_user", (req, res) => {
     res.send(req.user);
   });
 };
