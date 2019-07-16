@@ -9,6 +9,10 @@ import reduxThunk from "redux-thunk";
 import App from "./components/App";
 import reducers from "./reducers";
 
+// These give us access to axios in the developer console while testing.
+// import axios from "axios";
+// window.axios = axios;
+
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
