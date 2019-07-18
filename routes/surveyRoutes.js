@@ -11,7 +11,7 @@ const Survey = mongoose.model("surveys");
 
 module.exports = app => {
   app.get("/api/surveys", requireLogin, async (req, res) => {
-    console.log(req);
+    // console.log(req);
     const surveys = await Survey.find({ _user: req.user.id }).select({
       // This select portion allows us to tell mongo to not include the recipients list in our surveys. In this case, that could be an extremely large chunk of data.
       recipients: false
